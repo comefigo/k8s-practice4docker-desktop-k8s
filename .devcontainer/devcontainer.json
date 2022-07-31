@@ -1,0 +1,9 @@
+{
+	"name": "k8s practice",
+	"dockerFile": "Dockerfile",
+	"context": "..",
+	"extensions": [
+		"ms-python.python"
+	],
+	"shutdownAction": "stopContainer"
+}
