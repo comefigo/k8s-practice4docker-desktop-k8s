@@ -3,7 +3,8 @@
 	"dockerFile": "Dockerfile",
 	"context": "..",
 	"extensions": [
-		"ms-python.python"
+		"ms-python.python",
+		"ms-kubernetes-tools.vscode-kubernetes-tools"
 	],
 	"shutdownAction": "stopContainer"
 }
