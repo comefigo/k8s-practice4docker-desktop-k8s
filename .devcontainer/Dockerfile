@@ -15,12 +15,12 @@ RUN if [ -f "requirements.txt" ]; then pip install -r requirements.txt && rm req
 ADD https://storage.googleapis.com/kubernetes-release/release/v1.24.3/bin/linux/amd64/kubectl /usr/local/bin/kubectl
 ADD https://github.com/wercker/stern/releases/download/1.11.0/stern_linux_amd64 /usr/local/bin/stern
 RUN chmod +x ./usr/local/bin/kubectl \
-    && kubectl version --client
+    && kubectl version --client \
     && chmod +x ./usr/local/bin/stern \
-    && stern --version
+    && stern --version \
     && wget -q -O /tmp/trivy.deb https://github.com/aquasecurity/trivy/releases/download/v0.30.4/trivy_0.30.4_Linux-64bit.deb \
     && dpkg -i /tmp/trivy.deb \
-    && rm /tmp/trivy.deb
+    && rm /tmp/trivy.deb \
     && trivy --version
 
 # Add auto completer & alias
