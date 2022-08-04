@@ -1,3 +1,4 @@
 *.pem
 *.pyc
 kube-config/config
+manifest
