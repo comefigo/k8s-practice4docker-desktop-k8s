@@ -13,14 +13,17 @@ RUN if [ -f "requirements.txt" ]; then pip install -r requirements.txt && rm req
 
 # Add kubectl, stern
 ADD https://storage.googleapis.com/kubernetes-release/release/v1.24.3/bin/linux/amd64/kubectl /usr/local/bin/kubectl
-ADD https://github.com/wercker/stern/releases/download/1.11.0/stern_linux_amd64 /usr/local/bin/stern
-RUN chmod +x ./usr/local/bin/kubectl \
+
+RUN wget -q -O /tmp/stern.tar.gz https://github.com/stern/stern/releases/download/v1.22.0/stern_1.22.0_linux_amd64.tar.gz \
+    && tar -zxvf /tmp/stern.tar.gz -C /tmp/ \
+    && cp /tmp/stern /usr/local/bin/stern \
+    && chmod +x /usr/local/bin/kubectl \
     && kubectl version --client \
-    && chmod +x ./usr/local/bin/stern \
+    && chmod +x /usr/local/bin/stern \
     && stern --version
 
 # Add trivy
-RUN wget -q -O /tmp/trivy.deb https://github.com/aquasecurity/trivy/releases/download/v0.30.4/trivy_0.30.4_Linux-64bit.deb \
+RUN wget -q -O /tmp/trivy.deb https://github.com/aquasecurity/trivy/releases/download/v0.31.1/trivy_0.31.1_Linux-64bit.deb \
     && dpkg -i /tmp/trivy.deb \
     && rm -f /tmp/trivy.deb \
     && trivy --version
